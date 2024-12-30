@@ -11,120 +11,164 @@
     </script>
     <style>
         /* Estilo do cabeçalho personalizado */
-        .chat-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #B30400;
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 8px 8px 0 0;
-            font-family: Arial, sans-serif;
-        }
+       /* Estilo do cabeçalho personalizado */
+.chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #B30400;
+    color: #fff;
+    padding: 15px 30px;
+    border-radius: 8px 8px 0 0;
+    font-family: Arial, sans-serif;
+    height: 60px; /* Altura fixa */
+    box-sizing: border-box;
+    position: relative; /* Ajuste para evitar problemas de sobreposição */
+}
 
-        .chat-header .avatar {
-            display: flex;
-            align-items: center;
-        }
+.chat-header .avatar {
+    display: flex;
+    align-items: center;
+}
 
-        .chat-header img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-        }
+.chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
 
-        .chat-header .info {
-            display: flex;
-            flex-direction: column;
-        }
+.chat-header .info {
+    display: flex;
+    flex-direction: column;
+}
 
-        .chat-header .info strong {
-            font-size: 16px;
-        }
+.chat-header .info strong {
+    font-size: 16px;
+}
 
-        .chat-header .info span {
-            font-size: 12px;
-            color: #ddd;
-        }
+.chat-header .info span {
+    font-size: 12px;
+    color: #ddd;
+}
 
-        .chat-header .close-btn {
-            font-size: 18px;
-            cursor: pointer;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #fff;
-            border-radius: 50%;
-        }
+.chat-header .close-btn {
+    font-size: 18px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    position: absolute; /* Posicionamento para maior controle */
+    top: 15px; /* Distância do topo */
+    right: 20px; /* Distância da lateral */
+}
 
-        .chat-container {
-            position: fixed;
-            bottom: 0;
-            right: 20px;
-            width: 400px;
-            height: 600px;
-            border-radius: 8px;
-            background-color: #fff;
-            z-index: 99999;
-            display: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+.chat-container {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: 400px;
+    height: 680px;
+    border-radius: 8px;
+    background-color: #fff;
+    z-index: 99999;
+    display: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
-        typebot-standard {
-            width: 100%;
-            height: 100%;
-        }
 
-        /* Estilo do avatar reduzido */
-        .reduced-avatar {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: block;
-            cursor: pointer;
-            z-index: 100000;
-        }
+/* Estilo do avatar reduzido */
+.reduced-avatar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: block;
+    cursor: pointer;
+    z-index: 100000;
+}
 
-        /* Responsividade para telas menores */
-        @media (max-width: 768px) {
-            .chat-container {
-                width: 100%;
-                height: 100%;
-                bottom: 0;
-                right: 0;
-                border-radius: 0;
-                z-index: 1000000; /* Garante que o chat fique acima de todos os elementos */
-            }
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+    .chat-container {
+        width: 100%;
+        height: 100%;
+        bottom: 0;
+        right: 0;
+        border-radius: 0;
+        z-index: 1000000; /* Garante que o chat fique acima de todos os elementos */
+    }
 
-            .chat-header {
-                z-index: 1000001; /* Garante que o cabeçalho do chat fique acima de todos os elementos */
-                position: relative;
-            }
+    .chat-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 15px; /* Ajuste do padding para mobile */
+        height: 60px; /* Altura fixa */
+        box-sizing: border-box; /* Inclui o padding na altura total */
+    }
 
-            body {
-                margin: 0;
-                overflow: hidden; /* Impede o scroll quando o chat está aberto */
-            }
-        }
+    .chat-header .avatar {
+        flex-grow: 1; /* Faz o avatar ocupar mais espaço, mantendo o layout fluido */
+    }
 
-        header {
-            position: relative;
-            z-index: 10;
-        }
+    .chat-header .close-btn {
+        position: absolute; /* Garante posicionamento consistente */
+        top: 10px; /* Distância do topo no mobile */
+        right: 15px; /* Ajuste para lateral direita */
+        width: 35px; /* Aumenta tamanho para facilitar clique */
+        height: 35px;
+        font-size: 24px; /* Fonte maior no mobile */
+        border: 2px solid #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+  typebot-standard {
+    margin-top: 30px;
+    height: calc(100% - 30px);
+    position: relative;
+    z-index: 0;
+}
+
+typebot-standard::before {
+    content: '';
+    position: absolute;
+    top: -30px; /* Alinha o gradiente com o topo do conteúdo */
+    left: 0;
+    width: 100%;
+    height: 30px; /* Altura do gradiente */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff); /* Gradiente do transparente ao branco */
+    z-index: 1; /* Fica acima do conteúdo */
+    pointer-events: none; /* Não interfere na interação do usuário */
+}
+
+    body {
+        margin: 0;
+        overflow: hidden; /* Impede o scroll quando o chat está aberto */
+    }
+}
+
+/* Classe para bloquear o scroll */
+.no-scroll {
+    overflow: hidden;
+    height: 100vh;
+}
+
     </style>
 </head>
 <body>
-    <header>
-        <h1>Meu Site</h1>
-    </header>
-
+ 
     <!-- Contêiner do Chat com Cabeçalho e Avatar -->
     <div class="chat-container" id="chat-container">
         <div class="chat-header">
@@ -157,23 +201,27 @@
         let typebotInitialized = false;
 
         function openChat() {
-            chatContainer.style.display = 'block';
-            reducedAvatar.style.display = 'none';
+            chatContainer.style.display = 'block'; // Exibe o chat
+            reducedAvatar.style.display = 'none'; // Oculta o avatar reduzido
             document.body.style.overflow = 'hidden'; // Impede o scroll quando o chat está aberto
             if (!typebotInitialized) {
                 Typebot.initStandard({
-                    typebot: "my-typebot-2usgp7j",
-                    container: document.getElementById('typebot-instance')
+                    typebot: "my-typebot-2usgp7j", // Substitua pelo seu ID do Typebot
+                    container: document.getElementById('typebot-instance'),
                 });
                 typebotInitialized = true;
             }
         }
+// Garantir que o avatar reduzido esteja oculto ao carregar a página
+reducedAvatar.style.display = 'none';
 
-        function closeChat() {
-            chatContainer.style.display = 'none';
-            reducedAvatar.style.display = 'block';
-            document.body.style.overflow = 'auto'; // Permite o scroll quando o chat está fechado
-        }
+// Abrir o chat automaticamente ao carregar a página
+openChat();
+       function closeChat() {
+    chatContainer.style.display = 'none'; // Oculta o chat
+    reducedAvatar.style.display = 'block'; // Exibe o avatar reduzido
+    document.body.style.overflow = 'auto'; // Permite o scroll
+}
 
         // Evento para abrir o chat ao clicar no avatar reduzido
         reducedAvatar.addEventListener('click', openChat);
